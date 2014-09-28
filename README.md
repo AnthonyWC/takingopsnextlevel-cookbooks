@@ -1,5 +1,5 @@
-reinvent2013-cookbooks
+reinvent2014-cookbooks
 ======================
 
-Cookbooks used during re:Invent 2013
+Cookbooks used during re:Invent 2014
 
