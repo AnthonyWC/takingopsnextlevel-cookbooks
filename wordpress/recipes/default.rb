@@ -30,7 +30,7 @@ node[:deploy].each do |application, deploy|
       :password        => (deploy[:database][:password] rescue nil),
       :dbhost          => (deploy[:database][:host] rescue nil),
       :lang            => node['wordpress']['languages']['lang'],
-      :cachenode       => node['wordpress']['cachenode']
+      :cachenode       => (deploy[:environment][:cachenode] rescue nil)
     )
   end
 end
