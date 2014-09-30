@@ -25,10 +25,10 @@ node[:deploy].each do |application, deploy|
     group "root"
     mode "0644"
     variables(
-      :database        => node['wordpress']['db']['database'],
-      :user            => node['wordpress']['db']['user'],
-      :password        => node['wordpress']['db']['password'],
-      :dbhost          => node['wordpress']['dbhost'],
+      :database        => (deploy[:database][:database] rescue nil),
+      :user            => (deploy[:database][:username] rescue nil),
+      :password        => (deploy[:database][:password] rescue nil),
+      :dbhost          => (deploy[:database][:host] rescue nil),
       :lang            => node['wordpress']['languages']['lang'],
       :cachenode       => node['wordpress']['cachenode']
     )
