@@ -20,7 +20,7 @@ service "crond" do
   supports :restart => true
 end
 
-directory "#{node['InfraHelper']['base_dir']}" do
+directory node['InfraHelper']['base_dir'] do
   action :create
   mode 0755
   owner "root"
@@ -53,8 +53,8 @@ end
 
 
 %w{ HistoryEventIterator.php IHCommon.php IHActWorker_EIP.php IHActWorker_SrcDestCheck.php IHActWorker_VPCRouteMapper.php IHDeciderStart.php IHQueueWatcher.php IHSWFDecider.php IHSWFsetup.php }.each do |ifile|
-  cookbook_file "#{node['InfraHelper']['base_dir']}/bin/#{ifile}" do
-   source "#{ifile}"
+  cookbook_file node['InfraHelper']['base_dir']/bin/#{ifile}" do
+   source #{ifile}
    mode 0755
    owner "root"
    group "root"

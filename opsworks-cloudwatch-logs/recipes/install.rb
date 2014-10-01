@@ -8,6 +8,6 @@ mode "0755"
 end
 
 execute "Install CloudWatch Logs agent" do
-command "/opt/aws/cloudwatch/awslogs-agent-setup-v1.0.py -n -r us-east-1 -c /tmp/cwlogs.cfg"
+command "/opt/aws/cloudwatch/awslogs-agent-setup-v1.0.py -n -r us-west-2 -c /tmp/cwlogs.cfg"
 not_if { system "pgrep -f aws-logs-agent-setup" }
 end

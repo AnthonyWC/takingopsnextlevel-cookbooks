@@ -9,6 +9,8 @@ version          "1.1.2"
 recipe "WordPress", "Installs and configures WordPress LAMP stack on a single system"
 recipe "WordPress::languages", "Install WordPress translation files"
 
+depends "deploy"
+
 attribute "WordPress/version",
   :display_name => "WordPress download version",
   :description => "Version of WordPress to download from the WordPress site or 'latest' for the current release.",
