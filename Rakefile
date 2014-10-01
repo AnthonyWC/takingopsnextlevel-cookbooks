@@ -6,7 +6,7 @@ task :foodcritic do
     sandbox = File.join(File.dirname(__FILE__), %w{tmp foodcritic cookbook})
     prepare_foodcritic_sandbox(sandbox)
 
-    sh "foodcritic --epic-fail any -f ~FC001 ."
+    sh "foodcritic -f any -f ~FC001 ."
   else
     puts "WARN: foodcritic run is skipped as Ruby #{RUBY_VERSION} is < 1.9.2."
   end
