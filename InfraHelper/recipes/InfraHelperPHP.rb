@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: InfraHelper
-# Recipe:: default
+# Recipe:: InfraHelperPHP
 #
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,37 +20,12 @@ service "crond" do
   supports :restart => true
 end
 
-directory node['InfraHelper']['base_dir'] do
-  action :create
-  mode 0755
-  owner "root"
-  group "root"
-  recursive true
-end
-
 directory "/tmp/secure-dir" do
   action :create
   mode 0700
   owner "root"
   group "root"
 end
-
-template "config.inc.php" do
-  path "#{node['InfraHelper']['base_dir']}/config.inc.php"
-  source "config.inc.php.erb"
-  owner "root"
-  group "root"
-  mode 0644
-  backup false
-end
-
-directory "#{node['InfraHelper']['base_dir']}/bin" do
-  action :create
-  mode 0755
-  owner "root"
-  group "root"
-end
-
 
 %w{ HistoryEventIterator.php IHCommon.php IHActWorker_EIP.php IHActWorker_SrcDestCheck.php IHActWorker_VPCRouteMapper.php IHDeciderStart.php IHQueueWatcher.php IHSWFDecider.php IHSWFsetup.php }.each do |ifile|
   cookbook_file node['InfraHelper']['base_dir']/bin/#{ifile}" do
@@ -61,26 +36,6 @@ end
    action :create
    notifies :restart, "service[crond]"
   end
-end
-
-template "IHResources.php" do
-  path "#{node['InfraHelper']['base_dir']}/bin/IHResources.php"
-  source "IHResources.php.erb"
-  owner "root"
-  group "root"
-  mode 0644
-  variables(
-   :IH_queue          => node['InfraHelper']['IH_queue'],
-   :IHswf_domain      => node['InfraHelper']['IHswf_domain'],
-   :SWF_Region        => node['InfraHelper']['SWF_Region'],
-   :EC2_Region        => node['InfraHelper']['EC2_Region']
-  )
-  backup false
-end
-
-execute "IHSWFsetup.php" do
-  cwd "#{node['InfraHelper']['base_dir']}/bin/"
-  command "/usr/bin/php #{node['InfraHelper']['base_dir']}/bin/IHSWFsetup.php"
 end
 
 cron "IHQeueWatcher" do
