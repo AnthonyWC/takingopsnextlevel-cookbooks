@@ -18,8 +18,7 @@
 include_recipe 'deploy'
 
 node[:deploy].each do |application, deploy|
-
-  template node[:deploy][:current_path]"/wp-config.php" do
+  template "#{deploy[:current_path]}/wp-config.php" do
     source "wp-config.php.erb"
     owner "root"
     group "root"
