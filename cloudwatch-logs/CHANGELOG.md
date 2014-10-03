@@ -1,10 +1,10 @@
-# CHANGELOG for opsworks-cloudwatch-logs-cookbooks
+# CHANGELOG for cloudwatch-logs
 
-This file is used to list changes made in each version of opsworks-cloudwatch-logs-cookbooks.
+This file is used to list changes made in each version of cloudwatch-logs.
 
 ## 0.0.1:
 
-* Initial release of opsworks-cloudwatch-logs-cookbooks
+* Initial release of cloudwatch-logs
 * Borrowed heavily from: https://github.com/amazonwebservices/opsworks-cloudwatch-logs-cookbooks
 
 - - -

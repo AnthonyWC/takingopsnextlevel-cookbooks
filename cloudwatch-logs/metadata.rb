@@ -1,4 +1,4 @@
-name             "opsworks-cloudwatch-logs-cookbooks"
+name             "cloudwatch-logs"
 maintainer       "Chris Munns"
 maintainer_email "chrismunns@gmail.com"
 license          "Apache 2"

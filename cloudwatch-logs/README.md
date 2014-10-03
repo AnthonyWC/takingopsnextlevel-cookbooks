@@ -1,4 +1,4 @@
-opsworks-cloudwatch-logs-cookbooks
+cloudwatch-logs
 =============
 
 Installs CloudWatch Logs agent & config. This is for use in the Taking AWS Operations to the Next Level bootcamp, Lab 2/3.
