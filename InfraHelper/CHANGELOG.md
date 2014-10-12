@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of InfraHelper.
 
+## 0.0.2:
+
+* Replacing all the PHP bits with Ruby bits for the AWS Re:Invent 2014
+
+- - -
 ## 0.0.1:
 
 * Initial release of InfraHelper

@@ -17,9 +17,4 @@
 #
 
 # General settings
-default['InfraHelper']['base_dir'] = "/opt/InfraHelper"
-default['InfraHelper']['IH_queue'] = "PUT SNS QUEUE HERE"
-default['InfraHelper']['IHswf_domain'] = "PUT SWF DOMAIN HERE"
-default['InfraHelper']['SWF_Region'] = "swf.us-west-2.amazonaws.com"
-default['InfraHelper']['EC2_Region'] = "ec2.us-west-2.amazonaws.com"
 
