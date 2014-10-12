@@ -27,7 +27,7 @@ directory "/tmp/secure-dir" do
   group "root"
 end
 
-%w{ HistoryEventIterator.php IHCommon.php IHActWorker_EIP.php IHActWorker_SrcDestCheck.php IHActWorker_VPCRouteMapper.php IHDeciderStart.php IHQueueWatcher.php IHSWFDecider.php IHSWFsetup.php }.each do |ifile|
+%w{ HistoryEventIterator.php IHActWorker_EIP.php IHActWorker_SrcDestCheck.php IHActWorker_VPCRouteMapper.php IHDeciderStart.php IHSWFDecider.php }.each do |ifile|
   cookbook_file node['InfraHelper']['base_dir']/bin/#{ifile}" do
    source #{ifile}
    mode 0755
@@ -36,16 +36,6 @@ end
    action :create
    notifies :restart, "service[crond]"
   end
-end
-
-cron "IHQeueWatcher" do
-  command "/usr/bin/php #{node['InfraHelper']['base_dir']}/bin/IHQueueWatcher.php >>/tmp/IHstuff.log 2>&1"
-  only_if do File.exist?("#{node['InfraHelper']['base_dir']}/bin/IHQueueWatcher.php") end
-end
-
-cron "IHQeueWatcher-30" do
-  command "sleep 30; /usr/bin/php #{node['InfraHelper']['base_dir']}/bin/IHQueueWatcher.php >>/tmp/IHstuff.log 2>&1"
-  only_if do File.exist?("#{node['InfraHelper']['base_dir']}/bin/IHQueueWatcher.php") end
 end
 
 cron "IHDeciderStart" do

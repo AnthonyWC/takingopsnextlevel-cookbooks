@@ -40,6 +40,17 @@ directory "#{node['InfraHelper']['base_dir']}/bin" do
   group "root"
 end
 
+%w{ IHCommon.php IHSWFsetup.php }.each do |ifile|
+  cookbook_file node['InfraHelper']['base_dir']/bin/#{ifile}" do
+   source #{ifile}
+   mode 0755
+   owner "root"
+   group "root"
+   action :create
+   notifies :restart, "service[crond]"
+  end
+end
+
 template "IHResources.php" do
   path "#{node['InfraHelper']['base_dir']}/bin/IHResources.php"
   source "IHResources.php.erb"
