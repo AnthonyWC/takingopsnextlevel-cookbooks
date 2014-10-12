@@ -13,28 +13,31 @@
 # permissions and limitations under the License.
 #
 
-template "IHQueueConfig.yml" do
-  path "##{deploy[:current_path]}/IHQueueConfig.yml"
-  source "IHQueueConfig.yml.erb"
-  owner "root"
-  group "root"
-  mode 0644
-  variables(
-   :myQueue         => (deploy[:environment][:IHqueue] rescue nil),
-   :myRegion        => (opsworks[:instance][:region] rescue nil)
-  )
-  backup false
-end
+include_recipe 'deploy'
 
-template "infrahelper.json" do
-  path "##{deploy[:current_path]}/infrahelper.json"
-  source "infrahelper.json.erb"
-  owner "root"
-  group "root"
-  mode 0644
-  variables(
-   :myDomain         => (deploy[:environment][:myDomain] rescue nil)
-  )
-  backup false
-end
+node[:deploy].each do |application, deploy|
+  template "IHQueueConfig.yml" do
+    path "##{deploy[:current_path]}/IHQueueConfig.yml"
+    source "IHQueueConfig.yml.erb"
+    owner "root"
+    group "root"
+    mode 0644
+    variables(
+     :myQueue         => (deploy[:environment][:IHqueue] rescue nil),
+     :myRegion        => (opsworks[:instance][:region] rescue nil)
+    )
+    backup false
+  end
 
+  template "infrahelper.json" do
+    path "##{deploy[:current_path]}/infrahelper.json"
+    source "infrahelper.json.erb"
+    owner "root"
+    group "root"
+    mode 0644
+    variables(
+     :myDomain         => (deploy[:environment][:myDomain] rescue nil)
+    )
+    backup false
+  end
+end
