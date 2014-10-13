@@ -32,17 +32,10 @@ node[:deploy].each do |application, deploy|
 
   directory "/var/log/infrahelper" do
     action :create
-    mode 0755
+    mode 0777
     owner "root"
     group "root"
     recursive true
-  end
-
-  file "/var/log/infrahelper/app.log" do
-    action :create_if_missing
-    mode 0755
-    owner "root"
-    group "root"
   end
 
   template "IHQueueConfig.yml" do
