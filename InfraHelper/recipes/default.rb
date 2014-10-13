@@ -30,6 +30,14 @@ node[:deploy].each do |application, deploy|
     recursive true
   end
 
+  directory "/var/log/infrahelper" do
+    action :create
+    mode 0755
+    owner "root"
+    group "root"
+    recursive true
+  end
+
   template "IHQueueConfig.yml" do
     path "#{deploy[:current_path]}/IHQueueConfig.yml"
     source "IHQueueConfig.yml.erb"
@@ -38,7 +46,7 @@ node[:deploy].each do |application, deploy|
     mode 0644
     variables(
      :myQueue         => (deploy[:environment][:IHqueue] rescue nil),
-     :myRegion        => (opsworks[:instance][:region] rescue nil)
+     :myRegion        => (node[:opsworks][:instance][:region] rescue nil)
     )
     backup false
   end
