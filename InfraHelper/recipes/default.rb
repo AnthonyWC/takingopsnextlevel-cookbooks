@@ -22,6 +22,14 @@ node[:deploy].each do |application, deploy|
     next
   end
 
+  directory "#{deploy[:current_path]}" do
+    action :create
+    mode 0755
+    owner "root"
+    group "root"
+    recursive true
+  end
+
   template "IHQueueConfig.yml" do
     path "##{deploy[:current_path]}/IHQueueConfig.yml"
     source "IHQueueConfig.yml.erb"

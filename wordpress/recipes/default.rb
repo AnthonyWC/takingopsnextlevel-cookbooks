@@ -18,6 +18,12 @@
 include_recipe 'deploy'
 
 node[:deploy].each do |application, deploy|
+
+  if deploy[:application_type] != 'php'
+    Chef::Log.debug("Skipping application #{application} as it is not an php app")
+    next
+  end
+
   template "#{deploy[:current_path]}/wp-config.php" do
     source "wp-config.php.erb"
     owner "root"
