@@ -31,7 +31,7 @@ node[:deploy].each do |application, deploy|
   end
 
   template "IHQueueConfig.yml" do
-    path "##{deploy[:current_path]}/IHQueueConfig.yml"
+    path "#{deploy[:current_path]}/IHQueueConfig.yml"
     source "IHQueueConfig.yml.erb"
     owner "root"
     group "root"
@@ -44,7 +44,7 @@ node[:deploy].each do |application, deploy|
   end
 
   template "infrahelper.json" do
-    path "##{deploy[:current_path]}/infrahelper.json"
+    path "#{deploy[:current_path]}/infrahelper.json"
     source "infrahelper.json.erb"
     owner "root"
     group "root"
