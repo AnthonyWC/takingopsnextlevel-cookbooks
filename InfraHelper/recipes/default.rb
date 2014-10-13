@@ -38,6 +38,13 @@ node[:deploy].each do |application, deploy|
     recursive true
   end
 
+  file "/var/log/infrahelper/app.log" do
+    action :create_if_missing
+    mode 0755
+    owner "root"
+    group "root"
+  end
+
   template "IHQueueConfig.yml" do
     path "#{deploy[:current_path]}/IHQueueConfig.yml"
     source "IHQueueConfig.yml.erb"
