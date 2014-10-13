@@ -16,6 +16,12 @@
 include_recipe 'deploy'
 
 node[:deploy].each do |application, deploy|
+
+  if deploy[:application_type] != 'aws-flow-ruby'
+    Chef::Log.debug("Skipping application #{application} as it is not an aws-flow-ruby app")
+    next
+  end
+
   template "IHQueueConfig.yml" do
     path "##{deploy[:current_path]}/IHQueueConfig.yml"
     source "IHQueueConfig.yml.erb"
