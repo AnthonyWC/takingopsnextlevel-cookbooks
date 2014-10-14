@@ -91,7 +91,7 @@ node[:deploy].each do |application, deploy|
     user "root"
     cwd "#{deploy[:current_path]}"
     code <<-EOH
-      command "cd /srv/www/infrahelper/current; /usr/local/bin/ruby /srv/www/infrahelper/current/IHQueueWatcher_control.rb restart"
+      /usr/local/bin/ruby /srv/www/infrahelper/current/IHQueueWatcher_control.rb restart
     EOH
   end
 
