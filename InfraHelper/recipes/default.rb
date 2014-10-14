@@ -87,9 +87,12 @@ node[:deploy].each do |application, deploy|
     backup false
   end
 
-  execute 'start queuewatcher' do
-    command "ruby '#{deploy[:current_path]}'/IHQueueWatcher_control.rb restart"
-    action :run
+  bash 'start queuewatcher' do
+    user "root"
+    cwd "#{deploy[:current_path]}"
+    code <<-EOH
+      command "ruby IHQueueWatcher_control.rb restart"
+    EOH
   end
 
 end
