@@ -32,10 +32,25 @@ node[:deploy].each do |application, deploy|
 
   directory "/var/log/infrahelper" do
     action :create
-    mode 0777
+    mode 0755
     owner "root"
     group "root"
     recursive true
+  end
+
+  file "/var/log/infrahelper/app.log" do
+    action :create_if_missing
+    mode 0777
+    owner "deploy"
+    group "apache"
+  end
+
+  gem_package "aws-sdk" do
+    action :install
+  end
+
+  gem_package "aws-flow" do
+    action :install
   end
 
   template "IHQueueConfig.yml" do
@@ -62,4 +77,10 @@ node[:deploy].each do |application, deploy|
     )
     backup false
   end
+
+  execute 'start queuewatcher' do
+    command "ruby '#{deploy[:current_path]}'/IHQueueWatcher_control.rb restart"
+    action :run
+  end
+
 end
