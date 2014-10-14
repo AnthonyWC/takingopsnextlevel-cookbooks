@@ -53,6 +53,15 @@ node[:deploy].each do |application, deploy|
     action :install
   end
 
+  gem_package "daemons" do
+    action :install
+  end
+
+  gem_package "json" do
+    action :install
+  end
+
+
   template "IHQueueConfig.yml" do
     path "#{deploy[:current_path]}/IHQueueConfig.yml"
     source "IHQueueConfig.yml.erb"
