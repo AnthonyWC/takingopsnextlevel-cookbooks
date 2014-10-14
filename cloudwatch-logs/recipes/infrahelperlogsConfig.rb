@@ -13,16 +13,17 @@
 # permissions and limitations under the License.
 #
 
-directory "/opt/aws/cloudwatch" do
- recursive true
+
+template "/etc/cwlogs.cfg" do
+  source "cwlogs.cfg.erb"
+  owner "root"
+  group "root"
+  mode 0644
+	variables(
+		:myFile         => "/var/log/infrahelper/app.log",
+		:logGroup				=> "InfraHelper"
+	)
+	backup false
 end
 
-remote_file "/opt/aws/cloudwatch/awslogs-agent-setup.py" do
-source "https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py"
-mode "0755"
-end
-
-execute "Install CloudWatch Logs agent" do
-command "/opt/aws/cloudwatch/awslogs-agent-setup.py -n -r us-west-2 -c /etc/cwlogs.cfg"
-not_if { system "pgrep -f aws-logs-agent-setup" }
-end
+include_recipe "install"

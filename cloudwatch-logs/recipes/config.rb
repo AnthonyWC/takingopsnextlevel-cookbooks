@@ -13,9 +13,16 @@
 # permissions and limitations under the License.
 #
 
-template "/tmp/cwlogs.cfg" do
+template "/etc/cwlogs.cfg" do
   source "cwlogs.cfg.erb"
   owner "root"
   group "root"
   mode 0644
+  variables(
+		:myFile         => (node[:opsworks][:stack][:name] rescue nil),
+		:logGroup				=> (node[:opsworks][:stack][:name].gsub(' ','_') rescue nil)
+	)
+	backup false
 end
+
+include_recipe "install"
