@@ -26,4 +26,4 @@ template "/etc/cwlogs.cfg" do
 	backup false
 end
 
-include_recipe "install"
+include_recipe "cloudwatch-logs::install"
