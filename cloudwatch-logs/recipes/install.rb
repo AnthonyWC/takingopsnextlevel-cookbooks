@@ -23,6 +23,6 @@ mode "0755"
 end
 
 execute "Install CloudWatch Logs agent" do
-command "/opt/aws/cloudwatch/awslogs-agent-setup.py -n -r us-west-2 -c /etc/cwlogs.cfg"
+command "/opt/aws/cloudwatch/awslogs-agent-setup.py -n -r "+(node[:opsworks][:instance][:region])+" -c /etc/cwlogs.cfg"
 not_if { system "pgrep -f aws-logs-agent-setup" }
 end
